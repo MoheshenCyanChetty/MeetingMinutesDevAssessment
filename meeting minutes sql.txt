@@ -1,0 +1,45 @@
+CREATE TABLE `MeetingType` (
+  `MeetingTypeID` INT AUTO_INCREMENT,
+  `TypeCode` VARCHAR(5),
+  `TypeName` VARCHAR(50),
+  PRIMARY KEY (`MeetingTypeID`)
+);
+
+CREATE TABLE `Meeting` (
+  `MeetingID` INT AUTO_INCREMENT,
+  `MeetingTypeID` INT,
+  `MeetingNumber` INT,
+  `MeetingDate` DATE,
+  `MeetingTime` TIME,
+  PRIMARY KEY (`MeetingID`),
+  FOREIGN KEY (`MeetingTypeID`) REFERENCES `MeetingType`(`MeetingTypeID`)
+);
+
+CREATE TABLE `MeetingItem` (
+  `MeetingItemID` INT AUTO_INCREMENT,
+  `MeetingID` INT,
+  `Description` VARCHAR(255),
+  `DateCreated` DATETIME,
+  `ResponsiblePerson` VARCHAR(100),
+  `ItemName` VARCHAR(50),
+  PRIMARY KEY (`MeetingItemID`),
+  FOREIGN KEY (`MeetingID`) REFERENCES `Meeting`(`MeetingID`)
+);
+
+CREATE TABLE `MeetingItemStatus` (
+  `StatusID` INT AUTO_INCREMENT,
+  `MeetingItemID` INT,
+  `MeetingID` INT,
+  `Status` VARCHAR(50),
+  `ActionRequired` VARCHAR(255),
+  `DateUpdated` DATETIME,
+  PRIMARY KEY (`StatusID`),
+  FOREIGN KEY (`MeetingItemID`) REFERENCES `MeetingItem`(`MeetingItemID`),
+  FOREIGN KEY (`MeetingID`) REFERENCES `Meeting`(`MeetingID`)
+);
+
+
+INSERT INTO `MeetingType` (`TypeCode`, `TypeName`) VALUES
+('M', 'MANCO'),
+('F', 'Finance'),
+('PTL', 'Project Team Leader');
