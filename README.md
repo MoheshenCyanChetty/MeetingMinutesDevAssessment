@@ -9,3 +9,5 @@ For Database SetUp
     - click Admin button for MySQL
     - create a database called "meeting_minutes"
     - insert SQL found in "meeting minutes sql" text file
+
+see Chilisoft Dev Assessment ERD
